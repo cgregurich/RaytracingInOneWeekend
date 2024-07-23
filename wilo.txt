@@ -1,2 +1,2 @@
 3. The vec3 class
-Trying to understand the difference between the two overloaded operators for []. Create a sandbox to mess with it??
+Next up is dot and cross product.
