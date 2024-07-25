@@ -1,2 +1,4 @@
 3. The vec3 class
-Next up is dot and cross product.
+understanding what cross product is, first
+working through a learning breakdown of determinants,
+which involves a parallelepiped?? how do you pronounce that?

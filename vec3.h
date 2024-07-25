@@ -90,8 +90,8 @@ inline vec3 operator/(const vec3& v, double t) {
     return (1/t) * v;
 }
 
-// inline double dot(const vec3& v1, const vec3& v2) {
-//     return 
-// }
+inline double dot(const vec3& v1, const vec3& v2) {
+    return v1.x * v2.x + v1.y * v2.y + v1.z + v2.z;
+}
 
 #endif
