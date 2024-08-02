@@ -1,4 +1,6 @@
-3. The vec3 class
-understanding what cross product is, first
-working through a learning breakdown of determinants,
-which involves a parallelepiped?? how do you pronounce that?
+4. Rays, a simple camera, and background
+
+
+Questions:
+* What is a unit vector again?
+* What is the std::ostream in write_color() in color.h?

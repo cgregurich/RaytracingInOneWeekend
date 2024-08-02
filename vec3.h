@@ -94,4 +94,16 @@ inline double dot(const vec3& v1, const vec3& v2) {
     return v1.x * v2.x + v1.y * v2.y + v1.z + v2.z;
 }
 
+inline vec3 cross(const vec3& a, const vec3& b) {
+    return vec3(
+        a.y*b.z - a.z*b.y,
+        a.z*b.x - a.x*b.z,
+        a.x*b.y - a.y*b.x
+    );
+}
+
+inline vec3 unit_vector(const vec3& v) {
+    return v / v.length();
+}
+
 #endif

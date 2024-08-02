@@ -1,4 +1,5 @@
 #include <iostream>
+#include "color.h"
 #include "vec3.h"
 
 void renderSampleImage(int imageWidth, int imageHeight) {
@@ -10,12 +11,8 @@ void renderSampleImage(int imageWidth, int imageHeight) {
             auto r = double(j) / (imageWidth - 1);
             auto g = double(i) / (imageHeight - 1);
             auto b = 0.0;
-
-            int ir = int(255.999 * r);
-            int ig = int(255.999 * g);
-            int ib = int(255.999 * b);
-
-            std::cout << ir << ' ' << ig << ' ' << ib << '\n';
+            auto pixelColor = color(r, g, b);
+            write_color(std::cout, pixelColor);
         }
     }
     std::clog << "\rDone.                          \n";
@@ -30,9 +27,9 @@ int main() {
     int imageHeight = 256;
 
     // Render
-    // renderSampleImage(imageWidth, imageHeight);
-    vec3 v(1, 2, 3);
-    std::cout << v << std::endl;
+    renderSampleImage(imageWidth, imageHeight);
+    // vec3 v(1, 2, 3);
+    // std::cout << v << std::endl;
 
     
 
