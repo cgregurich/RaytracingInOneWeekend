@@ -1,36 +1,60 @@
 #include <iostream>
 #include "color.h"
+#include "ray.h"
 #include "vec3.h"
 
-void renderSampleImage(int imageWidth, int imageHeight) {
-    std::cout << "P3\n" << imageWidth << ' ' << imageHeight << "\n255\n";
+color rayColor(const ray& r) {
+    return color(0, 0, 0);
+}
 
-    for (int i=0; i<imageHeight; i++) {
-        std::clog << "\rScanlines remaining: " << (imageHeight - i) << ' ' << std::flush;
-        for (int j=0; j<imageHeight; j++) {
-            auto r = double(j) / (imageWidth - 1);
-            auto g = double(i) / (imageHeight - 1);
-            auto b = 0.0;
-            auto pixelColor = color(r, g, b);
-            write_color(std::cout, pixelColor);
-        }
-    }
-    std::clog << "\rDone.                          \n";
+void renderSampleImage(int imageWidth, int imageHeight) {
 
 }
 
 
 int main() {
 
+    auto aspectRatio = 16.0 / 9.0;
+    int imageWidth = 400;
 
-    int imageWidth = 256;
-    int imageHeight = 256;
+    // Calculate the image height and ensure that it's at least 1
+    int imageHeight = int(imageWidth / aspectRatio);
+    imageHeight = (imageHeight < 1) ? 1 : imageHeight;
+
+
+    // Camera
+    auto focalLength = 1.0;
+    auto viewportHeight = 2.0;
+    auto viewportWidth = viewportHeight * (double(imageWidth)/imageHeight);
+    auto cameraCenter = point3(0, 0, 0);
+
+    // Calculate the vectors across the horizontal and down the vertical viewport edges
+    auto viewportU = vec3(viewportWidth, 0, 0);
+    auto viewportV = vec3(0, -viewportHeight, 0);
+
+    // Calculator the horizontal and vertical delta vectors from pixel to pixel
+    auto pixelDeltaU = viewportU / imageWidth;
+    auto pixelDeltaV = viewportV / imageHeight;
+
+    // Calculate the location of the upper left pixel
+    auto viewportUpperLeft = cameraCenter - vec3(0, 0, focalLength) - viewportU/2 - viewportV/2;
+    auto pixel00Loc = viewportUpperLeft + 0.5 * (pixelDeltaU + pixelDeltaV);
+
 
     // Render
-    renderSampleImage(imageWidth, imageHeight);
-    // vec3 v(1, 2, 3);
-    // std::cout << v << std::endl;
+    std::cout << "P3\n" << imageWidth << ' ' << imageHeight << "\n255\n";
 
+    for (int i=0; i<imageHeight; i++) {
+        std::clog << "\rScanlines remaining: " << (imageHeight - i) << ' ' << std::flush;
+        for (int j=0; j<imageHeight; j++) {
+            auto pixelCenter = pixel00Loc + (j * pixelDeltaU) + (i * pixelDeltaV);
+            auto rayDirection = pixelCenter - cameraCenter;
+            ray r(cameraCenter, rayDirection);
+            color pixelColor = rayColor(r);
+            write_color(std::cout, pixelColor);
+        }
+    }
+    std::clog << "\rDone.                          \n";
     
 
 }

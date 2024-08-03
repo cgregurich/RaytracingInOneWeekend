@@ -1,6 +1,14 @@
 4. Rays, a simple camera, and background
+Don't understand wtf any of this is.
+really having a hard time wrapping my head around what a viewport is/
+why it's needed?? Isn't it just a subgrid of sorts??
+why do we say "a pixel is X fraction of a viewport unit" as opposed to
+"a viewport unit is 20 pixels"?? So lost. Videos perhaps??
+Hard to understand the math/calculations being implemented in code
+when I don't understand the concepts behind it all.
 
 
 Questions:
 * What is a unit vector again?
 * What is the std::ostream in write_color() in color.h?
+    // todo ? why are we calculating width instead of height like with image dimensions?
